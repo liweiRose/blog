@@ -1,0 +1,59 @@
+body{
+	font-size:small;
+	font-family:verdana,helvetica,arial,sans-serif;
+	line-height:1.6em;
+}
+h1,h2{
+	color:#007e7e;
+}
+h1{font-size:150%;}
+h2{font-size:130%;}
+#guarantee{
+	border-color:white;
+	border-width:1px;
+	border-style:dashed;
+	background-color:#a7cece;
+	padding:25px;
+	padding-left:120px;
+	margin:30px;
+	margin-right:250px;
+	line-height:1.9em;
+	font-style:italic;
+	font-color:#444444;
+	font-family: georgia;,"Times New Roman",times,serif;
+	background-image:url(../img/333.png);
+	background-repeat: no-repeat;
+	backgrond-position:top left;
+}
+#elixirs{
+	border-width:thin;
+	border-style:solid;
+	border-color:#007e7e;
+	width:200px;
+	
+	
+	padding-right:20px;
+	padding-bottom:20px;
+	padding-left:20px;
+	margin-left:20px;
+	
+	text-align:center;
+	background-image:url(../img/57I58PICn89_1024.jpg);
+	background-repeat:repeat-x;
+	
+	line-height:1.5;
+	float:right;
+}
+#elixirs h2{
+	color:black;	
+}
+#elixirs h3{
+	color:#d12c47;
+}
+a:link{
+	color:green;
+}
+a:visited{color:red;}
+a:hover{color:yellow;background:#f88396;}
+.cd{font-style:italic;}
+.artist{font-weight: bold;}

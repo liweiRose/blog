@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>李威的个人博客       -一个在web前端行业奋斗的智者</title>
+<meta name="keywords" content="学无止境" />
+<meta name="description" content="技术" />
+<link rel="icon" href="../../../images/logo.ico" type="image/x-icon"/>
+<link href="../../../css/base.css" rel="stylesheet">
+<link href="../../../css/about.css" rel="stylesheet">
+<!--[if lt IE 9]>
+<script src="../../../js/modernizr.js"></script>
+<![endif]-->
+<script src="../../../js/scrollReveal.js"></script>
+</head>
+<body>
+<header>
+  <div class="logo" data-scroll-reveal="enter right over 1s"><a href="../../../index.html"><img src="../../../images/logo.png"></a></div>
+  <nav class="topnav"><a href="../../../index.html"><span>首页</span><span class="en">Home</span></a><a href="../../../about.html"><span>关于我</span><span class="en">About</span></a><a href="../../../manshenghuo.html"><span>慢生活</span><span class="en">Life</span></a><a href="../../../learn.html"><span>学无止境</span><span class="en">Learn</span></a><a href="../../../gbook.html"><span>留言</span><span class="en">Saying</span></a></nav>
+</header>
+<article>
+  <div class="container">
+    <div class="about left">
+    	 <ul>
+    	 	<h4 class="atitle">
+    	 		<span>2017-9-17</span>
+    	 		如何在网页标题栏title加入logo(icon)图标？
+    	 	</h4>
+    	 	<p class="newsnav">
+    	 		您现在的位置是:
+    	 		<a href="../../../index.html">首页></a>
+    	 		<a href="../../../learn.html">学无止境></a>
+    	 		<a href="../index.html">推荐工具></a>
+    	 	</p>
+    	 		<p><strong>方法一（被动式）：</strong></p>
+    	 		<p>制作一个ico格式的图片，将图片命名为favicon.ico，像素大小为16*16，所使用的颜色不得超过16色，然后再把favicon.ico放到网站的根目录下就行了。这样的话浏览器会不停的搜索您的网站的根目录，只要它一发现了名字叫做favicon.ico 这个文件，就会将该图标显示在访问者的地址栏和收藏夹列表中了。</p>
+    	 		<p><strong>方法二（自动式）：</strong></p>
+    	 		<p>在网页HEAD标记中添加如下代码：</p>
+    	 		<div class="shili">
+    	 			<p>标题栏：</p>
+    	 			<p>&lt;link rel="icon" href="ico地址" type="image/x-icon"&gt;</p>
+    	 			<p>收藏夹：</p>
+    	 			<p>&lt;link rel="shortcut icon" href="ico地址" type="image/x-icon"&gt;</p>
+    	 		</div>
+    	 		<p>注意：图标要用 16*16 的。。。(保证了兼容性，无论在哪个地方都可以显示)</p>
+    	 		<p>在这里要注意，如果将 16*16 的 bmp 文件改为 ico ，在WINDOWS 支持，但放在浏览器或别的软件就会出错 。因此图片的格式要通过软件来调整，毕竟内部的信息是不一样的。</p>
+    	 		<p>同时在使用方法二的时候，就不一定要把图形文件放在网站的根目录下面了，你可以放在任何位置，甚至直接连结到其他网站上面的图形文件也可以，而且图形文件的文件 名也不一定要叫做 favicon.ico，可以自己随便取。 不过要注意的是使用这个做法的话，只有在把有加入上面 HTML 语法的页面加入书签的时候才会有作用。</p>
+    	 		<p class="newsnav"> 这里在来一个网上图片抓换的网址:<a target="_blank" href="http://www.ico.la/">http://www.ico.la/</a></p>
+    	 </ul>
+    	 <div class="keybq"><span>关键字词：</span>图标，工具</div>
+    	 <div class="nextinfo"><p>上一篇：<a href="../index.html">返回列表</a></p><p>下一篇：<a href="#">。。</a></p></div>
+    	 <div class="otherlink">
+    	 	<h2>相关文章</h2>
+    	 	<ul>
+    	 		<li><a href="#"title="1">11</a></li>
+    	 		<li><a href="#"title="11">22</a></li>
+    	 		<li><a href="#"title="11">33</a></li>
+    	 		<li><a href="#"title="11">44</a></li>
+    	 	</ul>
+    	 </div>
+    	 <div class="gbko">留言区</div>
+    </div>
+  </div>
+  </aside>
+</article>
+<footer>
+	<a href="#">文章属于原创@主要目的是记录学习历程，其中发表的言论仅供参考！<br/>如有发现侵权或发现错误请发邮箱:2412852641@qq.com</a>
+
+</footer>
+<script>
+	if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))){
+		(function(){
+			window.scrollReveal = new scrollReveal({reset: true});
+		})();
+	};
+</script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>订货表单</title>
+		<link rel="stylesheet" href="css/new_file.css">
+	</head>
+	<body>
+		<div class="all">
+		<h1>购买前需填以下信息：</h1>
+		<h2>填完以下信息后并提交后，我们才会发货</h2>
+		<form action="../猫屎咖啡博客园/index.html" method="POST">
+			
+			<div class="tablerow">
+			<p>
+				选择咖啡类型：
+				</p>
+			<p>
+				<select name="beans">
+					<option value="加热咖啡">加热咖啡</option>
+					<option value="双皮奶">双皮奶</option>
+					<option value="芒果冰沙">芒果冰沙</option>
+					<option value="卡布奇诺">卡布奇诺</option>
+				</select>
+					
+			</p>
+			</div>
+			<div class="tablerow">
+			<p>
+				Type:</p>
+			<p>
+				<input type="radio" name="leix" value="who">全豆咖啡<br>
+				<input type="radio" name="leix" value="yanmo" checked>研磨咖啡
+			</p>
+			</div>
+			<div class="tablerow">	
+			<p>
+				数量：</p>
+			<p>
+				<input type="number" name="bags" min="1" max="10">
+			</p>
+			</div>
+			<div class="tablerow label">
+			<p>
+				最快送达时间：</p>
+			<p>
+				<input type="date" name="date">
+			</p>
+			</div>
+			<div class="tablerow">
+			<p>
+				选择：</p>
+			<p>
+				<input type="checkbox" name="选择" value="礼盒包装">礼盒包装<br>
+				<input type="checkbox" name="选择" value="需要纸质发票" checked>需要纸质发票
+			</p>
+			</div>
+			<div class="tablerow">
+			<p class="heading">送货地址：</p>
+			<p></p>
+			</div>
+			<div class="tablerow">
+			<p>名字：</p><p><input type="text"placeholder="李威" name="name" required></p>
+			</div>
+			<div class="tablerow">
+			<p>地址：</p><p><input type="text" placeholder="安徽省宿州市灵璧县" name="地址"></p>
+			</div>
+			<div class="tablerow">
+			<p>省份：</p><p><input type="text"placeholder="安徽" name="城市"></p>
+			</div>
+			<div class="tablerow">
+			<p>乡镇：</p><p><input type="text"placeholder="省份" name="乡镇"></p>
+			</div>
+			<div class="tablerow">
+			<p>邮编：</p><p><input type="namber"placeholder="234200" name="邮编"></p>
+			</div>
+			<div class="tablerow">
+			<p>手机号码：</p><p><input type="tel"placeholder="15720508121" name="手机"></p>
+			</div>
+			<div class="tablerow">
+			<p>客户留言：</p>
+			<p><textarea name="留言" rows="10" cols="48"></textarea></p>
+			
+			</div>
+			<div class="tablerow">
+				<p></p>
+				<p><input type="submit" value="提交">	
+			</p>
+			</div>
+		</form>
+		</div>
+	</body>
+</html>
