@@ -8,4 +8,4 @@
 制作博客的过程还是很考验人的耐心的，由于GitHub只能做到静态页面之间的切换，所以要非常准确的将某一个点击对应另外一个HTML文件，内部逻辑性很强。在绑定域名上也花了不少功夫，[知乎上各种方法](https://www.zhihu.com/question/31377141)都试了还是不行，最后终于找到问题所在，原来我买了域名后默认就解析了好多地址，把默认绑定的都删了再绑定GitHub就OK了。
 
 ## 展示一下我的博客
-[liweiblog.club/html/index.html](http://liweiblog.club/html/index.html)
+[https://liweirose.github.io/blog/html/index.html](https://liweirose.github.io/blog/html/index.html)
