@@ -69,7 +69,9 @@ width:840px;
 .memorial_day ul li.n2 { position: absolute; top: 54px; left: 220px }
 .memorial_day ul li.n3 { position: absolute; top: 54px; left: 390px }
 .memorial_day ul li.n4 { position: absolute; top: 54px; left: 480px }
-.memorial_day ul li.n5 { position: absolute; top: 54px; left: 790px }
+.memorial_day ul li.n5 { position: absolute; top: 54px; left: 580px }
+.memorial_day ul li.n6 { position: absolute; top: 54px; left: 680px }
+.memorial_day ul li.nn { position: absolute; top: 54px; left: 790px }
 .about { width: 90%; margin: 30px auto; overflow: hidden; line-height: 22px; }
 .about h2 { font-size: 22px; margin-bottom: 20px; background: #2a7497; padding: 10px 0; width: 200px; text-align: center; border-radius: 0 30px 30px 0; box-shadow: #21566f 1px 1px 1px; border-left: #dae1e4 6px solid; }
 .about p { margin-bottom: 20px }
