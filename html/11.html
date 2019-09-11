@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        li{
+            color: red;
+        }
+        li::before{
+            content: '1111';
+            color: yellow;
+        }
+        li:hover{
+            color: blue;
+        }
+        li[type="radio"]{
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="box2">
+        <ul class="box2">
+            <li type="radio" class="box3">
+                <div id="app">11</div>
+                <span class="box1"></span>
+            </li>
+            <li>111</li>
+        </ul>
+    </div>
+</body>
+<script>
+    function getParentNode(element, className) {
+        var that = this;
+        var returnParentElement = null;
+        function isElement(obj){
+            if( typeof HTMLElement === 'object' ){
+                return obj instanceof HTMLElement;
+            }else{
+                return obj && typeof obj === 'object' && obj.nodeType === 1 && typeof obj.nodeName === 'string';
+            }
+        }
+        function getParent(element, className) {
+            if(isElement(element)) {
+                if(element && element.classList.contains(className) && element.tagName.toLowerCase() != "body") {
+                    returnParentElement = element;
+                } else {
+                    getParent(element.parentElement, className);
+                }
+            }
+        }
+        getParent(element, className);
+
+        return returnParentElement;
+    }
+    window.onload=function(){
+        
+    let aa = getParentNode(document.getElementById('app'),'box2');
+    // console.log(aa);
+    function setData(key, value){
+        if('indexedDB' in window){
+            value.id = key;
+            console.log("浏览器支持indexedDB");
+            return new Promise((resolve, reject) => {
+                var request = window.indexedDB.open('appdb', '1.0'); 
+                var db;
+                //数据库升级事件
+                request.onupgradeneeded = function (event) {
+                    db = event.target.result;
+                    var objectStore;
+                    if (!db.objectStoreNames.contains('ServerInfo')) {
+                        console.log('22222')
+                        objectStore = db.createObjectStore('ServerInfo', { keyPath: 'id' });
+                        // objectStore.createIndex("id", "id", { unique: false });
+                    }
+                }
+                request.onerror = function (event) {
+                    console.log('数据库打开报错');
+                }
+                request.onsuccess = function (event) {
+                    db = request.result;
+                    console.log('数据库打开成功');
+                    let set = db.transaction(['ServerInfo'], 'readwrite')
+                        .objectStore('ServerInfo')
+                        .add(value);
+                    resolve(value.name);
+                    set.onsuccess = function (event) {
+                        console.log('数据写入成功');
+                    };
+                    set.onerror = function (event) {
+                        console.log('数据写入失败');
+                    } 
+                
+                }
+        });
+        }else if(window.openDatabase){ 
+            console.log("浏览器支持DataBase"); 
+            var db = openDatabase("appdb", "1.0", "appdatabase", 1024 * 1024 * 100, function(result) {
+                console.log("首页:创建数据库成功");
+                db = result;
+            });
+                if(!db) {
+                    console.log("数据库创建失败！");
+                    return;
+                } else {
+                    return new Promise((resolve, reject) => {
+                        console.log("数据库创建成功！");
+                        db.transaction(function (tx) {
+                            tx.executeSql('DROP TABLE ServerInfo');
+                        });
+                        db.transaction(function(tx) {
+                            var sql = "CREATE TABLE IF NOT EXISTS ServerInfo (key, value)";
+                            tx.executeSql(sql, []);
+                            tx.executeSql("INSERT INTO ServerInfo (key,value) VALUES ('0001','测试2')");
+                            tx.executeSql("INSERT INTO ServerInfo (key,value) VALUES (?,?)",[key,JSON.stringify(value)]);
+                            }, function(error) {
+                            //执行失败的回调函数
+                            console.log("数据初始化失败，失败原因：" + error.message);
+                            }, function(result) {
+                            //执行成功的回调函数
+                            console.log("数据初始化成功");
+                                resolve(value.name);
+                        });
+                    });
+                }
+        }else if(window.localStorage){
+            return new Promise((resolve, reject) => {
+                var storage=window.localStorage;
+                storage.setItem(`${key}`,JSON.stringify(value));
+                resolve(value.name);
+            });
+        }else if(window.sessionStorage && false){
+            return new Promise((resolve, reject) => {
+                var storage=window.sessionStorage;
+                storage.setItem(`${key}`,JSON.stringify(value));
+                resolve(value.name);
+            });
+        }else if(window.navigator.cookieEnabled){
+            return new Promise((resolve, reject) => {
+                const date = new Date();
+                date.setTime(date.getTime() + (3000 * 24 * 60 * 60 * 1000));
+                const expires = `expires=${date.toGMTString()};;path=/${date.toGMTString()}`;
+                console.log(`${key}=${JSON.stringify(value)}; ${expires}`)
+                document.cookie = `${key}=${JSON.stringify(value)}; ${expires}`;
+                console.log(document.cookie)
+                resolve(value.name);
+            });
+        }
+    }
+    function getData(key){
+        if('indexedDB' in window){
+            return new Promise((resolve, reject) => {
+                var request = window.indexedDB.open('appdb'); 
+                var db;
+                //数据库升级事件
+                request.onupgradeneeded = function (event) {
+                    db = event.target.result;
+                }
+                request.onerror = function (event) {
+                    console.log('数据库打开报错');
+                }
+                request.onsuccess = function (event) {
+                    db = request.result;
+                    var transaction = db.transaction(['ServerInfo']);
+                    var objectStore = transaction.objectStore('ServerInfo');
+                    var read = objectStore.get(key);
+
+                    read.onerror = function(event) {
+                        console.log('事务失败');
+                    };
+
+                    read.onsuccess = function( event) {
+                        if (read.result) {
+                            let data = read.result; 
+                            resolve(data.name);
+                        } else {
+                            console.log('未获得数据记录');
+                        }
+                    };
+                }
+        });
+        }else if(window.openDatabase){ 
+            var db = openDatabase("appdb", "1.0", "appdatabase", 1024 * 1024 * 100, function(result) {
+                db = result;
+            });
+                if(!db) {
+                    console.log("数据库查询失败！");
+                    return;
+                } else {
+                    return new Promise((resolve, reject) => {
+                        db.transaction(function(tx) {
+                            tx.executeSql('select * from  ServerInfo where key="' + key + '"', [], function(tx, results) {
+                                len = results.rows.length;
+                                if(len < 1) {
+                                    alert("WebSql没找到key为" + key + "的值");
+                                return;
+                                }
+                                for (i = 0; i < len; i++)
+                                {
+                                    let searchData = JSON.parse(results.rows.item(i).value);
+                                    resolve(searchData.name);
+                                }	
+                            }, null);
+                        });
+                    });
+                }
+        }else if(window.localStorage){
+            return new Promise((resolve, reject) => {
+                var storage=window.localStorage;
+                let searchData = JSON.parse(storage.getItem(`${key}`));
+                resolve(searchData.name);
+            });
+        }else if(window.sessionStorage){
+            return new Promise((resolve, reject) => {
+                var storage=window.sessionStorage;
+                let searchData = JSON.parse(storage.getItem(`${key}`));
+                resolve(searchData.name);
+            });
+        }else if(window.navigator.cookieEnabled){
+            return new Promise((resolve, reject) => {
+                const name = `${key}=`;
+                const c = document.cookie.split(';');
+                for (let i = 0; i < c.length; i += 1) {
+                    const d = c[i].trim();
+                    if (d.indexOf(name) === 0) {
+                        const searchData = JSON.parse(d.substring(name.length, d.length));
+                        resolve(searchData.name) ;
+                    }
+                }
+            });
+        }
+    }
+    //1.
+    // setData('userData', { name : '大搜车'}).then(data => {
+    //     console.log(`存:‘${data}’`); // 输出 '大搜车'
+    //     return getData('userData');
+    // }).then(data => {
+    //     console.log(`取:‘${data}’`); // 输出 '大搜车'
+    // });
+    //2.
+    // setData('userData', {name:'大搜车'}).then((data) => {
+    //     console.log(data);
+    // });
+    // getData('userData').then(data => {
+    //     console.log(data);
+    // });
+}
+</script>
+</html>
